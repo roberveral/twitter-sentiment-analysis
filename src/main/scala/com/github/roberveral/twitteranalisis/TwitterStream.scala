@@ -35,7 +35,7 @@ object TwitterStream {
     /* Extracts the sentiment only for the english twits */
     val data = stream.filter(_.getLang == "en")
       .map(status => TwitSentiment(status.getUser.getName, status.getCreatedAt, status.getText,
-        SentimentAnalyzer.getSentiment(status.getText).left.getOrElse(Sentiment.UNKNOWN)))
+        SentimentAnalyzer.getSentiment(status.getText).right.getOrElse(Sentiment.UNKNOWN)))
     /* Shows the result */
     data.print()
     /* Starts the stream */

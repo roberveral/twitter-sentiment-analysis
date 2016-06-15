@@ -28,9 +28,9 @@ object SentimentAnalyzer {
     * @return either the obtained sentiment, or an error message if the argument
     *         is null or empty.
     */
-  def getSentiment(text: String): Either[Sentiment, String] = Option(text) match {
-    case Some(input) => Left(extractSentiment(input))
-    case None => Right("Input can't be null or empty")
+  def getSentiment(text: String): Either[String, Sentiment] = Option(text) match {
+    case Some(input) => Right(extractSentiment(input))
+    case None => Left("Input cannot be null or empty")
   }
 
   private def extractSentiment(text: String): Sentiment =
